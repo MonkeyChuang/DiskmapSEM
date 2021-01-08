@@ -1,10 +1,9 @@
 
-% clear 
-% close all
+clear 
+close all
 addpath(genpath('.'));
 
-% M=load('benchmark_square');
-M = load(filename{3});
+M=load('benchmark_square');
 %% Preprocessing
 V = M.V;
 F = M.F;
@@ -19,10 +18,10 @@ idxF = repmat((1:nF)',1,3);
 % G: Vertex-Face adjacency matrix (~ unoriented incidence matrix)
 G = sparse(F,idxF,1,nV,nF);
 
-%% main
+%% Main
 [uv,C,D] = DiskmapSEM(F,V);
 
-%% main -- Show/Plot measurements
+%% Compute the evaluation metric(評價指標) of DiskmapSEM
 [OverlapIdx, OverlapNum] = isOverlap(F,uv);
 fprintf("Number of overlapped triangle: %d.\n",OverlapNum)
 
@@ -58,7 +57,7 @@ xlabel("Number of Iteration")
 title("Total Area Distortion")
 
 clear info info1 info2
-%% Main -- Plot resulting mesh
+%% Plot resulting mesh
 figure
 if isfield(M,'Vrgb')
     % Ex. 人臉
