@@ -21,6 +21,8 @@ The demo code includes several parts:
 ## Release History
 - 1.0
 	- Add: The most basic version of DiskmapSEM, PlotMesh, and others. An introductory demo code: demo_SEM.
+- 1.1
+	- Change: Comments/Documentation of demo_SEM and DiskmapSEM
 ## Contact
 Pei-Sheng Chuang - pschuang96@gmail.com
 ## Reference
