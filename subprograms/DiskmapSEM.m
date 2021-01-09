@@ -1,12 +1,11 @@
 % ===============
-% DiskmapGSEM computes the area-preserving parametrization from the input
+% DiskmapSEM computes the area-preserving parametrization from the input
 % 3D mesh onto the disk on the 2D plane.
 % ==== Input ====
 % F: index matrix of faces. nF x 3 array.
 % V: coordinates of vertices. nV x 3 array.
-% Fmass: mass(=area*density) of faces. nF x 1 array.
 % ==== Output ===
-% uv: the resulting measure-preserving map. nV x 3 array
+% uv: the resulting area-preserving map. nV x 3 array
 % Energy: the stretch energy at each iteration. maxIter x 1 array.
 % Distort: the total area distortion at each iteration. maxIter x 1 array.
 % ===============
@@ -14,7 +13,6 @@
 function [uv,Energy,Distort] = DiskmapSEM(F,V)
 % == Step0 ==
 % Initialize some variables.
-% Fmass may be zero, remember to add bias to avoid 1/0 = inf
 A = FaceArea(F,V);
 [VB, VI] = BoundaryIndex(F);
 
@@ -26,14 +24,12 @@ Distort = zeros(maxIter,1);
 % == Step1 == 
 % Compute the initial boundary/interior vertices
 [uv, L] = HarmonicMapping(F, V);
-
 % ===========
 
 % == Step1.5 == 
 % Compute initial stretch energy.
 uv0 = uv;
 ES0 = StretchEnergy(uv, L, VB);
-% Energy = [Energy,ES0];
 % =============
 
 % == Step2 == 

@@ -1,9 +1,9 @@
 
-clear 
-close all
+% clear 
+% close all
 addpath(genpath('.'));
 
-M=load('benchmark_square');
+M=load('CHY_5');
 %% Preprocessing
 V = M.V;
 F = M.F;
